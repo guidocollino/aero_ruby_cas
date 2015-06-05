@@ -284,6 +284,9 @@ module CASServer
     get "#{uri_path}/login" do
       CASServer::Utils::log_controller_action(self.class, params)
 
+      p request.cookies['cas_remembered_username']
+      @username = request.cookies['cas_remembered_username']
+
       # make sure there's no caching
       headers['Pragma'] = 'no-cache'
       headers['Cache-Control'] = 'no-store'
@@ -387,6 +390,12 @@ module CASServer
       # 2.2.2 (required)
       @username = params['username']
       @password = params['password']
+
+      if params['remember-me'] == 'yes'
+        # aquì se debe recordar el username y pass ya que fue seteado el recordarme
+        response.set_cookie('cas_remembered_username', :value => @username.to_s)
+      end  
+
       @lt = params['lt']
 
       # Remove leading and trailing widespace from username.
