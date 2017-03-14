@@ -2,6 +2,7 @@
 config.yml
 config/config.yml
 config/unicorn.rb
+config/newrelic.yml
 *.db
 *.sqlite3
 *.swp

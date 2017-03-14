@@ -13,3 +13,5 @@ end
 group :active_resource do
   gem "activeresource", ">= 2.3.12", "< 4.0"
 end
+
+gem 'newrelic_rpm'
